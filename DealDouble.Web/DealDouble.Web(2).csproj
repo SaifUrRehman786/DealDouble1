@@ -237,9 +237,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Auctions\Create.cshtml" />
-    <Content Include="Views\Auctions\Edit.cshtml" />
-    <Content Include="Views\Auctions\Index.cshtml" />
-    <Content Include="Views\Auctions\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -259,11 +256,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DealDouble.Entities\DealDouble.Entities.csproj">
-      <Project>{f7666f87-f082-417e-85c4-557036b09904}</Project>
+      <Project>{F7666F87-F082-417E-85C4-557036B09904}</Project>
       <Name>DealDouble.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\DealDouble.Services\DealDouble.Services.csproj">
-      <Project>{1ffd45bb-436c-4e4b-bbae-c10efaa7ec41}</Project>
+      <Project>{1FFD45BB-436C-4E4B-BBAE-C10EFAA7EC41}</Project>
       <Name>DealDouble.Services</Name>
     </ProjectReference>
   </ItemGroup>
