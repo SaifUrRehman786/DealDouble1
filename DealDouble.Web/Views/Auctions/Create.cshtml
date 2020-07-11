@@ -1,6 +1,6 @@
 ﻿<h2>Create Auction</h2>
 
-<form method="post">
+<form id="createForm" method="post" action="Auctions/Create/">
     <label>Title</label>
     <input name="Title" />
     <br />
@@ -21,5 +21,19 @@
     <input name="EndingTime"/>
     <br />
 
-    <button>Save</button>
+    <button type="button" id="saveButton">Save</button>
 </form>
+
+<script>
+    $("#saveButton").click(function () {
+        $.ajax({
+            url: "Auctions/Create/",
+            type: "post",
+            data: $("#createForm").serialize()
+        }).done(function (response) {
+         
+            $("#listingArea").html(response);
+
+        });
+    });
+</script>

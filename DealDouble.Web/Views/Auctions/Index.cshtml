@@ -1,58 +1,117 @@
 ﻿@model List<DealDouble.Entities.Auction>
 
-<table>
-    <thead>
-        <tr>
-            <th>
-                Title
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Actual Amount
-            </th>
-            <th>
-                Starting Time
-            </th>
-            <th>
-                Ending Time
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var auction in Model)
-        {
-        <tr>
+<div id="listingArea">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Actual Amount
+                </th>
+                <th>
+                    Starting Time
+                </th>
+                <th>
+                    Ending Time
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var auction in Model)
+            {
+                <tr>
 
-            <td>
-                <input type="hidden" value="@auction.ID" />
-            </td>
-            <td>
-                @auction.Title
-            </td>
-            <td>
-                @auction.Description
-            </td>
-            <td>
-                @auction.ActualAmount
-            </td>
-            <td>
-                @auction.StartingTime
-            </td>
-            <td>
-                @auction.EndingTime
-            </td>
-            <td>
-                <a href="Delete/@auction.ID">Delete</a>
-            </td>
-            <td>
-                <a href="Edit/@auction.ID">Edit</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                    <td>
+                        <input type="hidden" value="@auction.ID" />
+                    </td>
+                    <td>
+                        @auction.Title
+                    </td>
+                    <td>
+                        @auction.Description
+                    </td>
+                    <td>
+                        @auction.ActualAmount
+                    </td>
+                    <td>
+                        @auction.StartingTime
+                    </td>
+                    <td>
+                        @auction.EndingTime
+                    </td>
+                    <td>
+                        <button class="editButton" data-id="@auction.ID">Edit</button>
+                        <button class="deleteButton" data-id="@auction.ID">Delete</button>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <button id="createButton">Create New Auction</button>
+    </div>
+
+    <div id="contentArea">
+
+    </div>
+
+    <script>
+        $("#createButton").click(function () {
+            $.ajax({
+                url: "Auctions/Create/",
+                type: "get"
+            })
+                .done(function (response) {
+                  
+                    $("#contentArea").html(response);
+                });
+        });
+
+        $(".editButton").click(function () {
+            $.ajax({
+                url: "Auctions/Edit/",
+                type: "get",
+                data: {
+                    ID: $(this).attr("data-id")
+                }
+            })
+                .done(function (response) {
+
+                    $("#contentArea").html(response);
+                });
+        });
+
+        $(".deleteButton").click(function () {
+
+            var result = confirm("Are You Sure You Want To Delete This Auction?");
+
+            if (result == true) {
+
+                $.ajax({
+                    url: "Auctions/Delete/",
+                    type: "post",
+                    data: {
+                        ID: $(this).attr("data-id")
+                    }
+                })
+                    .done(function (response) {
+
+                        $("#listingArea").html(response);
+                    });
+            }
+
+        });
+    </script>
+</div>
+
+
+

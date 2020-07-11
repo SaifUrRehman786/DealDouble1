@@ -1,7 +1,7 @@
 ﻿@model DealDouble.Entities.Auction
 <h2>Edit Auction</h2>
 
-<form method="post">
+<form id="editForm" method="post">
     <input name="ID" value="@Model.ID" type="hidden" />
 
     <label>Title</label>
@@ -24,5 +24,19 @@
     <input name="EndingTime" value="@Model.EndingTime" />
     <br />
 
-    <button>Save</button>
+    <button id="saveButton">Save</button>
 </form>
+
+<script>
+    $("#saveButton").click(function () {
+        $.ajax({
+            url: "Auctions/Edit/",
+            type: "post",
+            data: $("#editForm").serialize()
+        }).done(function (response) {
+
+            $("#listingArea").html(response);
+
+        });
+    });
+</script>
